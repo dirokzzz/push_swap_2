@@ -75,15 +75,17 @@ void check_duble(t_stack *a)
 
     head = a;
     current = a;
-    while(current)
+    while(current->index)
     {
         elem = current->elem;
         index = current->index;
-        while(a->next)
+        while(a->next->index)
         {
-            a = a->next;
-            if((elem == a->elem && current->index != a->index) || a->elem > 2147483647)
+            //printf("a->elem=%d a->index=%d, elem=%d , index=%d\n", a->elem, a->index, elem, index);
+            //getchar();
+            if((elem == a->elem && index != a->index) || a->elem > 2147483647)
                 ft_error(2);
+            a = a->next;
         }
         a = head;
         current = current->next;
@@ -115,7 +117,7 @@ t_stack *index_init(t_stack *a, t_tab *tab)
     head = a;
     i = 0;
     sort_int_tab(tab->tab, tab->size);
-    while (i <= tab->size)
+    while (i < tab->size && a->next)
     {
         if(tab->tab[i] == a->elem)
         {
@@ -143,15 +145,14 @@ t_stack *init_stack_a(t_stack *stack, char **av, int ac, t_tab *tab)
     stack->next = NULL;
     while (x < tab->size)
     {
-        stack->index = 1;
+        printf("#");
+        stack->index = x;
         stack = new_elem(stack, tab->tab[x++]);
     }
-    stack = new_elem(stack, 0);
+    stack = new_elem(stack, -1);
     stack->index = 0;
     head = index_init(head, tab);
-    print_int_tab(tab->tab, tab->size);
     check_duble(head);
-
     return(head);
 }
 
