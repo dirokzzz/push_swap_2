@@ -22,7 +22,10 @@ void ft_ss(t_stack *a, t_stack *b)
 void ft_s_elem(t_stack *a)
 {
     if(a->next->index != 0)
+    {
         ft_swap_int(&a->elem, &a->next->elem);
+        ft_swap_int(&a->index, &a->next->index);
+    }
 }
 
 t_stack *ft_r_stack(t_stack *a)

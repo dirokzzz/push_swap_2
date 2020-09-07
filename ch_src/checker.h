@@ -1,7 +1,7 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
-#include "../libft/libft.h"
+#include "../libft/includes/ft_printf.h"
 #include <stdlib.h>
 #include <stdio.h>
 

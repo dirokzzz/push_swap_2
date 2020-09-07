@@ -3,11 +3,11 @@
 void ft_error(int e)
 {
     if(e == 1)
-        write(1, "Error1\n", 6);
+        ft_printf("NoNum\n");
     if(e == 2)
-        write(1, "Error2\n", 6);
+        ft_printf("Dubble\n");
     if(e == 3)
-        write(1, "Error3\n", 6);
+        ft_printf("Error3\n");
     exit(0);
 }
 
@@ -54,7 +54,7 @@ void check_arg(int ac, char **av)
     }
 }
 
-void check_duble(t_stack *a)
+void check_dubble(t_stack *a)
 {
     t_stack *head;
     t_stack *current;
@@ -86,7 +86,6 @@ t_stack *init_stack_a(t_stack *stack, char **av, int ac)
     int *tab;
     int size;
 
-    i = 1;
     x = 0;
     size = size_of_tab(ac, av);
     tab = parse_args(ac, av);
@@ -94,17 +93,16 @@ t_stack *init_stack_a(t_stack *stack, char **av, int ac)
         exit(0);
     head = stack;
     stack->elem = tab[x++];
-    stack->index = i;
-    i++;
+    stack->index = x;
     stack->next = NULL;
     while (x < size)
     {
         stack = new_elem(stack, tab[x++]);
-        stack->index = i++;
+        stack->index = x;
     }
     stack = new_elem(stack, 0);
     stack->index = 0;
-    check_duble(head);
+    check_dubble(head);
     return(head);
 }
 
@@ -118,7 +116,7 @@ void print_stacks(t_stack *a, t_stack *b)
         if(a->index)
         {
             flag = 1;
-            printf("%d ", a->elem);
+            ft_printf("%d ", a->elem);
             if(a->next)
                 a = a->next;
         }
@@ -127,31 +125,31 @@ void print_stacks(t_stack *a, t_stack *b)
             if(!flag)
             {
                 flag = 1;
-                printf("3%d", b->elem);
+                ft_printf("3%d", b->elem);
             }
             else
-                printf("%d", b->elem);
+                ft_printf("%d", b->elem);
             if(b->next)
                 b = b->next;
         }
         if(flag)
-            printf("\n");
+            ft_printf("\n");
         }
-    printf("_ _\na b\n");
+    ft_printf("_ _\na b\n");
 }
 int main(int ac, char **av)
 {
     t_stack *stack_a;
     t_stack *stack_b;
     
-
     stack_a = NULL;
     stack_b = NULL;
     if (ac >= 2)
     {
         stack_a = init_stack_a(stack_a, av, ac);
         stack_b = init_stack_b(stack_b);
+        print_stacks(stack_a, stack_b);
+        get_rule_check(stack_a, stack_b);
     }
-    print_stacks(stack_a, stack_b);
-    get_rule_check(stack_a, stack_b);
+    
 }

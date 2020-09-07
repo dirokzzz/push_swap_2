@@ -67,7 +67,7 @@ void rule_parse(char *line, t_rule *rule)
 	else if(!ft_strcmp(line, "rra"))
 		rule->rra = 1;
 	else
-		ft_error(1);
+		ft_error(4);
 }
 
 void b_zero_rule(t_rule *rule)
@@ -117,7 +117,6 @@ void get_rule_check(t_stack *a, t_stack *b)
 	{
 		b_zero_rule(rule);
 		flag = get_next_line(0, &line);
-		getchar();
 		if(!flag)
 			break;
 		rule_parse(line, rule);

@@ -27,7 +27,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C .././libft
-	$(CC) $(FLAGS) -I$(INC) ../libft/libft.a $(OBJ) -o $(NAME)
+	$(CC) $(FLAGS) -I$(INC) ../libft/libftprintf.a $(OBJ) -o $(NAME)
 	
 
 %.o : %.c $(INC)

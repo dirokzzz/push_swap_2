@@ -8,6 +8,10 @@ void ft_error(int e)
         write(1, "Error2\n", 6);
     if(e == 3)
         write(1, "Error3\n", 6);
+    if(e == 4)
+        write(1, "Error4\n", 6);
+    if(e == 3)
+        write(1, "Error5\n", 6);
     exit(0);
 }
 
@@ -18,7 +22,7 @@ void print_int_tab(int *tab, int size)
     i = 0;
     while(i < size)
     {
-        printf("%d\n", tab[i]);
+        ft_printf("%d\n", tab[i]);
         i++;
     }
 }
@@ -31,7 +35,7 @@ t_stack *new_elem(t_stack *stack, int elem)
     stack->next = new;
     new->elem = elem;
     if (new->elem < 0)
-        ft_error(1);
+        ft_error(5);
     new->next = NULL;
     return (new);
 }
@@ -66,7 +70,7 @@ void check_arg(int ac, char **av)
     }
 }
 
-void check_duble(t_stack *a)
+void check_dubble(t_stack *a)
 {
     t_stack *head;
     t_stack *current;
@@ -81,8 +85,6 @@ void check_duble(t_stack *a)
         index = current->index;
         while(a->next->index)
         {
-            //printf("a->elem=%d a->index=%d, elem=%d , index=%d\n", a->elem, a->index, elem, index);
-            //getchar();
             if((elem == a->elem && index != a->index) || a->elem > 2147483647)
                 ft_error(2);
             a = a->next;
@@ -91,7 +93,6 @@ void check_duble(t_stack *a)
         current = current->next;
     }
 }
-
 
 void sort_int_tab(int *tab, int size)
 {
@@ -142,17 +143,17 @@ t_stack *init_stack_a(t_stack *stack, char **av, int ac, t_tab *tab)
         exit(0);
     head = stack;
     stack->elem = tab->tab[x++];
+    stack->index = x;
     stack->next = NULL;
     while (x < tab->size)
     {
-        printf("#");
-        stack->index = x;
         stack = new_elem(stack, tab->tab[x++]);
+        stack->index = x;
     }
-    stack = new_elem(stack, -1);
+    stack = new_elem(stack, 0);
     stack->index = 0;
+    check_dubble(head);
     head = index_init(head, tab);
-    check_duble(head);
     return(head);
 }
 
@@ -166,7 +167,7 @@ void print_stacks(t_stack *a, t_stack *b)
         if(a->index)
         {
             flag = 1;
-            printf("%d %d", a->elem, a->index);
+            ft_printf("%d ", a->elem);
             if(a->next)
                 a = a->next;
         }
@@ -175,32 +176,36 @@ void print_stacks(t_stack *a, t_stack *b)
             if(!flag)
             {
                 flag = 1;
-                printf("3%d", b->elem);
+                ft_printf("3%d", b->elem);
             }
             else
-                printf("%d", b->elem);
+                ft_printf("%d", b->elem);
             if(b->next)
                 b = b->next;
         }
         if(flag)
-            printf("\n");
-        }
-    printf("_ _\na b\n");
+            ft_printf("\n");
+    }
+    ft_printf("_ _\na b\n");
 }
+
 int main(int ac, char **av)
 {
-    t_stack *stack_a;
-    t_stack *stack_b;
+    t_stack *a;
+    t_stack *b;
     t_tab   *tab;
     
     if(!(tab = malloc(sizeof(t_tab))))
         exit(0);
-    stack_a = NULL;
-    stack_b = NULL;
+    a = NULL;
+    b = NULL;
     if (ac >= 2)
     {
-        stack_a = init_stack_a(stack_a, av, ac, tab);
-        stack_b = init_stack_b(stack_b);
+        tab->head_a = init_stack_a(a, av, ac, tab);
+        tab->head_b = init_stack_b(b);
+        print_stacks(tab->head_a, tab->head_b);
+        sort_processing(tab);
+        print_stacks(tab->head_a, tab->head_b);
     }
-    print_stacks(stack_a, stack_b);
+    free(tab);
 }

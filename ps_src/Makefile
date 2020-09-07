@@ -12,12 +12,13 @@
 
 NAME = push_swap
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 INC = checker.h
 SRC =	main.c\
 		operations1.c\
 		pars_check_args.c\
 		stack_op.c\
+		sort_pocessig.c\
 
 OBJ = $(SRC:c=o)
 
@@ -26,7 +27,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C .././libft
-	$(CC) $(FLAGS) -I$(INC) ../libft/libft.a $(OBJ) -o $(NAME)
+	$(CC) $(FLAGS) -I$(INC) ../libft/libftprintf.a $(OBJ) -o $(NAME)
 	
 
 %.o : %.c $(INC)
