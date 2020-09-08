@@ -149,6 +149,7 @@ t_stack *init_stack_a(t_stack *stack, char **av, int ac, t_tab *tab)
     {
         stack = new_elem(stack, tab->tab[x++]);
         stack->index = x;
+        tab->tail_a = stack;
     }
     stack = new_elem(stack, 0);
     stack->index = 0;
@@ -167,7 +168,7 @@ void print_stacks(t_stack *a, t_stack *b)
         if(a->index)
         {
             flag = 1;
-            ft_printf("%d ", a->elem);
+            ft_printf("%d ", a->index);
             if(a->next)
                 a = a->next;
         }
@@ -176,10 +177,10 @@ void print_stacks(t_stack *a, t_stack *b)
             if(!flag)
             {
                 flag = 1;
-                ft_printf("3%d", b->elem);
+                ft_printf("3%d", b->index);
             }
             else
-                ft_printf("%d", b->elem);
+                ft_printf("%d", b->index);
             if(b->next)
                 b = b->next;
         }
@@ -197,15 +198,15 @@ int main(int ac, char **av)
     
     if(!(tab = malloc(sizeof(t_tab))))
         exit(0);
+    tab->bottom = 0;
     a = NULL;
     b = NULL;
     if (ac >= 2)
     {
         tab->head_a = init_stack_a(a, av, ac, tab);
         tab->head_b = init_stack_b(b);
-        print_stacks(tab->head_a, tab->head_b);
+        tab->top = tab->size / 2 + 1;
         sort_processing(tab);
-        print_stacks(tab->head_a, tab->head_b);
     }
     free(tab);
 }

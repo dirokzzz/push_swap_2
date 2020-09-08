@@ -27,9 +27,9 @@ void ft_s_elem(t_stack *a, char *s)
     {
         ft_swap_int(&a->elem, &a->next->elem);
         ft_swap_int(&a->index, &a->next->index);
-        if (ft_strcmp("sb", s))
+        if (!ft_strcmp("sb", s))
             ft_printf("sb\n");
-        if (ft_strcmp("sa", s))
+        if (!ft_strcmp("sa", s))
             ft_printf("sa\n");
     }
 }
@@ -50,9 +50,9 @@ t_stack *ft_r_stack(t_stack *a, char *s)
     last = current;
     first->next = current->next;
     last->next = first;
-    if (ft_strcmp("rb", s))
+    if (!ft_strcmp("rb", s))
         ft_printf("rb\n");
-    if (ft_strcmp("ra", s))
+    if (!ft_strcmp("ra", s))
         ft_printf("ra\n");
     return(a); 
 }
@@ -70,9 +70,9 @@ t_stack *ft_rr_stack(t_stack *a, char *s)
     last = a->next;
     a->next = a->next->next;
     last->next = first;
-    if (ft_strcmp("rrb", s))
+    if (!ft_strcmp(s, "rrb"))
         ft_printf("rrb\n");
-    if (ft_strcmp("rra", s))
+    else if (!ft_strcmp(s, "rra"))
         ft_printf("rra\n");
     return(last);
 }

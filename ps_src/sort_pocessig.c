@@ -7,6 +7,40 @@ void save_index(t_tab *tab, int *a, int *b, int *c)
     *c = tab->head_a->next->next->index;
 }
 
+void num_sort3(t_tab *tab)
+{
+while (tab->head_a->index != 1)
+    {
+        if (tab->head_a->index == tab->bottom + 1)
+        {  
+            tab->bottom += 1;
+            tab->head_a = ft_r_stack(tab->head_a, "ra");  
+        }
+        else
+            ft_push_b(tab);
+    }
+}
+
+void from_b_to_a(t_tab *tab)
+{
+    while (tab->head_b->index)
+    {
+        if(tab->head_b->index == tab->top - 1)
+         {
+            ft_push_a(tab);
+            tab->top -= 1;
+         }
+        if(tab->head_b->index == tab->bottom + 1)
+        {
+            ft_push_a(tab);
+            tab->bottom += 1;
+            tab->head_a = ft_r_stack(tab->head_a, "ra");
+        }
+        if(tab->head_b->index &&(tab->head_b->index != tab->top - 1 && tab->head_b->index != tab->bottom + 1))
+            tab->head_b = ft_rr_stack(tab->head_b, "rrb");
+    }
+}
+
 void num_sort(t_tab *tab)
 {
     int middle;
@@ -14,49 +48,25 @@ void num_sort(t_tab *tab)
 
     flag = 1;
     middle = tab->size / 2;
-    while (flag <= middle)
+    while (flag <= tab->size)
     {
         if(tab->head_a->index <= middle)
-        {
             ft_push_b(tab);
-            flag++;
-        }
         else
-            tab->head_a = ft_r_stack(tab->head_a, "ra");  
+            tab->head_a = ft_r_stack(tab->head_a, "ra");
+        flag++;  
     }
-    middle /= 2;
-    while (tab->head_b->index)
+    from_b_to_a(tab);
+    while (tab->head_a->index == tab->bottom + 1)
     {
-        if(tab->head_b->index <= middle)
-            tab->head_b = ft_r_stack(tab->head_b, "rb");
-        if(tab->head_b->index > middle)
-            ft_push_a(tab);
-        getchar();
-        print_stacks(tab->head_a, tab->head_b);
-
+        tab->bottom += 1;
+        tab->head_a = ft_r_stack(tab->head_a, "ra");
     }
-
+    tab->top = tab->size + 1;
+    num_sort3(tab);
+    from_b_to_a(tab);
+    num_sort3(tab);
 }
-/*
-t_stack *five_num_sort(t_stack *a, t_stack *b)
-{
-    t_stack *head;
-    int flag;
-
-    flag = 2;
-    head = a;
-    while (flag)
-    {
-        if(a->index < 3)
-        {
-            b = add_elem(a, b);
-		    a = del_elem(a);
-            ft_printf("pb\n");
-            flag--;
-        }
-    }
-    return;
-}*/
 
 void three_num_sort(t_tab *tab)
 {

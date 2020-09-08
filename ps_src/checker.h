@@ -33,6 +33,10 @@ typedef struct s_tab
     int size;
     t_stack *head_a;
     t_stack *head_b;
+    t_stack *tail_a;
+    t_stack *tail_b;
+    int bottom;
+    int top;
 }               t_tab;
 
 void    sort_processing(t_tab *tab);

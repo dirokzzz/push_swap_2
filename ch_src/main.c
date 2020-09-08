@@ -80,7 +80,6 @@ void check_dubble(t_stack *a)
 
 t_stack *init_stack_a(t_stack *stack, char **av, int ac)
 {
-    int i;
     int x;
     t_stack *head;
     int *tab;
@@ -148,7 +147,6 @@ int main(int ac, char **av)
     {
         stack_a = init_stack_a(stack_a, av, ac);
         stack_b = init_stack_b(stack_b);
-        print_stacks(stack_a, stack_b);
         get_rule_check(stack_a, stack_b);
     }
     

@@ -109,7 +109,9 @@ void get_rule_check(t_stack *a, t_stack *b)
 	char	*line;
 	int		flag;
 	t_rule	*rule;
+	int steps;
 
+	steps = 0;
 	if(!(rule = malloc(sizeof(t_rule))))
 		exit(0);
 	flag = 1;
@@ -119,12 +121,13 @@ void get_rule_check(t_stack *a, t_stack *b)
 		flag = get_next_line(0, &line);
 		if(!flag)
 			break;
+		steps++;
 		rule_parse(line, rule);
 		free(line);
 		rule_accept_a(&a, &b, rule);
 		rule_accept_b(&a, &b, rule);
 	}
-	print_stacks(a, b);
+	printf("STEPS=%d\n", steps);
 	check_array(a, b);
 	free(rule);
 }
