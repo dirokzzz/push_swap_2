@@ -4,16 +4,16 @@ void rule_accept_a(t_stack **a, t_stack **b, t_rule *rule)
 {
 	if(rule->rb)
 		*b = ft_r_stack(*b);
-	if (rule->rr)
+	else if (rule->rr)
 	{
 		*a = ft_r_stack(*a);
 		*b = ft_r_stack(*b);
 	}
-	if (rule->rra)
+	else if (rule->rra)
 		*a = ft_rr_stack(*a);
-	if(rule->rrb)
+	else if(rule->rrb)
 		*b = ft_rr_stack(*b);
-	if (rule->rrr)
+	else if (rule->rrr)
 	{
 		*a = ft_rr_stack(*a);
 		*b = ft_rr_stack(*b);
@@ -27,18 +27,18 @@ void rule_accept_b(t_stack **a, t_stack **b, t_rule *rule)
 		*a = add_elem(*b, *a);
 		*b = del_elem(*b);
 	}
-	if(rule->pb)
+	else if(rule->pb)
 	{
 		*b = add_elem(*a, *b);
 		*a = del_elem(*a);
 	}
-	if (rule->sa)
+	else if (rule->sa)
 		ft_s_elem(*a);
-	if (rule->sb)
+	else if (rule->sb)
 		ft_s_elem(*b);
-	if (rule->ss)
+	else if (rule->ss)
 		ft_ss(*a, *b);
-	if (rule->ra)
+	else if (rule->ra)
 		*a = ft_r_stack(*a);
 }
 
@@ -127,7 +127,7 @@ void get_rule_check(t_stack *a, t_stack *b)
 		rule_accept_a(&a, &b, rule);
 		rule_accept_b(&a, &b, rule);
 	}
-	printf("STEPS=%d\n", steps);
+	//printf("STEPS=%d\n", steps);
 	check_array(a, b);
 	free(rule);
 }

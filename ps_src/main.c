@@ -2,16 +2,8 @@
 
 void ft_error(int e)
 {
-    if(e == 1)
-        write(1, "Error1\n", 6);
-    if(e == 2)
-        write(1, "Error2\n", 6);
-    if(e == 3)
-        write(1, "Error3\n", 6);
-    if(e == 4)
-        write(1, "Error4\n", 6);
-    if(e == 3)
-        write(1, "Error5\n", 6);
+    if(e)
+        write(1, "Error\n", 6);
     exit(0);
 }
 
@@ -206,7 +198,8 @@ int main(int ac, char **av)
         tab->head_a = init_stack_a(a, av, ac, tab);
         tab->head_b = init_stack_b(b);
         tab->top = tab->size / 2 + 1;
-        sort_processing(tab);
+        if (!check_array(tab))
+            sort_processing(tab);
     }
     free(tab);
 }

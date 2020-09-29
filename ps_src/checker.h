@@ -39,6 +39,7 @@ typedef struct s_tab
     int top;
 }               t_tab;
 
+int     check_array(t_tab *tab);
 void    sort_processing(t_tab *tab);
 void    ft_error(int e);
 void    print_stacks(t_stack *stack_a, t_stack *stack_b);

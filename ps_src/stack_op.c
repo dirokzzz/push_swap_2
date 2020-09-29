@@ -25,3 +25,23 @@ t_stack *del_elem(t_stack *stack)
     free(tmp);
     return (stack);
 }
+
+int check_array(t_tab *tab)
+{
+	int ok;
+    t_stack *a;
+
+    a = tab->head_a;
+	ok = 1;
+	while(a->next->index)
+	{
+		if(a->elem > a->next->elem)
+			ok = 0;
+		a = a->next;
+	}
+	if(tab->head_b->index)
+		ok = 0;
+	if(ok)
+		return (1);
+	return (0);
+}

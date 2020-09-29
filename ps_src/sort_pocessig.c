@@ -100,8 +100,6 @@ void num_fifty_sort(t_tab *tab)
         }
     }
     from_b_to_a(tab);
-    //print_stacks(tab->head_a, tab->head_b);
-    //getchar();
     while (middle--)
     {
         if (tab->head_a->index == tab->bottom + 1)
@@ -114,11 +112,31 @@ void num_fifty_sort(t_tab *tab)
     }
     from_b_to_a(tab);
     num_sort3(tab);
-     //
+    middle = (tab->size - tab->bottom) / 2 + tab->bottom;
+    flag = middle;
+    while(flag--)
+    {
+        
+        if (tab->head_b->index <= middle)
+            tab->head_b = ft_r_stack(tab->head_b, "rb");
+        else
+            ft_push_a(tab);
+        if(tab->head_b->index == tab->bottom + 1)
+        {
+            ft_push_a(tab);
+            tab->bottom += 1;
+            tab->head_a = ft_r_stack(tab->head_a, "ra");
+        }
+    }
+    tab->top = middle + 1;
+    from_b_to_a(tab);
+    num_sort3(tab);
+    tab->top = tab->size + 1;
+    from_b_to_a(tab);
+    num_sort3(tab);
     //print_stacks(tab->head_a, tab->head_b);
+    //printf("!!!!!!!!!!!");
     //getchar();
-    
-    //
 }
 
 void three_num_sort(t_tab *tab)
@@ -144,8 +162,8 @@ void sort_processing(t_tab *tab)
 {
     if (tab->size == 3)
         three_num_sort(tab);
-    if (tab->size > 40)
+    else if (tab->size > 50)
         num_fifty_sort(tab);
-    if (tab->size > 5)
+    else if (tab->size <= 50)
         num_sort(tab);
 }

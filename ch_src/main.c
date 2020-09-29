@@ -2,11 +2,11 @@
 
 void ft_error(int e)
 {
-    if(e == 1)
-        ft_printf("NoNum\n");
-    if(e == 2)
+    if(e)
+        ft_printf("Error\n");
+    else if(e == 2)
         ft_printf("Dubble\n");
-    if(e == 3)
+    else if(e == 3)
         ft_printf("Error3\n");
     exit(0);
 }
@@ -18,8 +18,6 @@ t_stack *new_elem(t_stack *stack, int elem)
         exit(0);
     stack->next = new;
     new->elem = elem;
-    if (new->elem < 0)
-        ft_error(1);
     new->next = NULL;
     return (new);
 }
@@ -63,15 +61,15 @@ void check_dubble(t_stack *a)
 
     head = a;
     current = a;
-    while(current)
+    while(current->next)
     {
         elem = current->elem;
         index = current->index;
         while(a->next)
         {
-            a = a->next;
-            if((elem == a->elem && current->index != a->index) || a->elem > 2147483647)
+            if((elem == a->elem && current->index != a->index))
                 ft_error(2);
+            a = a->next;
         }
         a = head;
         current = current->next;

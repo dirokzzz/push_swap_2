@@ -58,7 +58,7 @@ int		join_line(const int fd, char **line, char **segment)
 		*line = ft_strjoin(*line, buf);
 		ft_strdel(&tmp);
 	}
-	return (was_read || ft_strlen(*segment) || (ft_strlen(*line))) ? 1 : 0;
+	return was_read ? 1 : 0;
 }
 
 t_gnl	*add_list(const int fd)
