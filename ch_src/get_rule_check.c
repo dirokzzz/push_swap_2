@@ -115,12 +115,9 @@ void get_rule_check(t_stack *a, t_stack *b)
 	if(!(rule = malloc(sizeof(t_rule))))
 		exit(0);
 	flag = 1;
-	while(flag)
+	while(get_next_line(0, &line))
 	{
 		b_zero_rule(rule);
-		flag = get_next_line(0, &line);
-		if(!flag)
-			break;
 		steps++;
 		rule_parse(line, rule);
 		free(line);

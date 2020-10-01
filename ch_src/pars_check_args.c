@@ -38,9 +38,9 @@ int size_of(char ***args)
     return(size);
 }
 
-int check_int(long int a)
+int check_int(int a, char *s)
 {
-    if(a > 2147483647 || a < -2147483648)
+    if(ft_strcmp(s, ft_itoa(a)))
         ft_error(1);
     return((int)a);
 }
@@ -64,7 +64,7 @@ int *parse_args(int ac, char **av)
         y = 0;
         while (args[x][y])
         {
-            square[size] = check_int(ft_atoi(args[x][y]));
+            square[size] = check_int(ft_atoi(args[x][y]), args[x][y]);
             y++;
             size++;
         }

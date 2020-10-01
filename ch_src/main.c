@@ -4,10 +4,6 @@ void ft_error(int e)
 {
     if(e)
         ft_printf("Error\n");
-    else if(e == 2)
-        ft_printf("Dubble\n");
-    else if(e == 3)
-        ft_printf("Error3\n");
     exit(0);
 }
 
